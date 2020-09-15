@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 
 import { connect } from 'react-redux';
 
-const LoginForm = props => {
+const Login = props => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -82,4 +82,4 @@ const mapStateToProps = state => ({
 //allows only relevant part of state to be exposed to this component
 //also, the connect function means don't need to explicitly subscribe or unsubscribe to the store
 //mapDispatchToProps specifies what actions we want to expose as props (instead of what state)
-export default connect(mapStateToProps)(LoginForm);
+export default connect(mapStateToProps)(Login);
