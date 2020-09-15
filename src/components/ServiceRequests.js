@@ -5,7 +5,7 @@ const ServiceRequests = () => {
   const [users, setUsers] = useState([]);
 
   async function fetchData() {
-    await fetch("http://localhost:8080/users/1", {
+    await fetch("http://localhost:8080/users/getuser/1", {
         method: "GET"
       })
         .then(response => response.json())

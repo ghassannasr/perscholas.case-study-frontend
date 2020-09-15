@@ -6,12 +6,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-
-
 import { createStore, applyMiddleware, compose } from 'redux';
 import reducer from './redux/reducer';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
+
+import { Provider } from 'react-redux';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
 
@@ -34,30 +33,14 @@ const store = createStore(
   composeEnhancers(applyMiddleware(reduxImmutableStateInvariant()))
 );
 
-console.log("IN INDEX");
-
 ReactDOM.render(
-
-    <App store={store} />,
-  document.getElementById('root')
-);
-
-
-/*
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
-*/
-
-/*
-ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
-*/
+
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA

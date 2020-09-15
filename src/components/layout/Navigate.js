@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Container, Row, Col } from 'react-bootstrap';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import {NavLink} from 'react-router-bootstrap'
 
@@ -28,12 +28,8 @@ const Navigate = () => (
           <Link to="/">Home</Link>
           <Link to="/servicerequests">Service</Link>
           <Link to="/about">About</Link>
-          <Nav.Link href="/login">Login</Nav.Link>
+          <Link to="/login">Login</Link>
         </Nav>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-success">Search</Button>
-        </Form>
       </Navbar.Collapse>
     </Navbar>
 
