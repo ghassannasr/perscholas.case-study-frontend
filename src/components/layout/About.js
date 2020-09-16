@@ -2,9 +2,10 @@ import React from 'react';
 
 
 const About = props => (
-  <div>
-    <h1>About Page</h1>
-  </div> 
+  <div className="sidebar-module sidebar-module-inset">
+    <h4>About</h4>
+    <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+  </div>
 );
 
 export default About;

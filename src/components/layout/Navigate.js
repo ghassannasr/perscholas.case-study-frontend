@@ -19,7 +19,7 @@ const Navigate = () => (
         tried this below:
         <Nav.Link><NavLink to="/about">About</NavLink></Nav.Link>
     */
-  <Container>
+  
     <Navbar fixed="top" bg="light" expand="sm">
       <Navbar.Brand href="/">Shopper</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -33,7 +33,7 @@ const Navigate = () => (
       </Navbar.Collapse>
     </Navbar>
 
-  </Container>
+  
 );
 
 export default Navigate;
