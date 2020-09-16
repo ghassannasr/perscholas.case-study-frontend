@@ -7,9 +7,7 @@ import './App.css';
 import Navigate from './components/layout/Navigate';
 import Header from './components/layout/Header';
 import Routes from './components/Routes';
-import About from './components/layout/About';
-import Archives from './components/layout/Archives';
-import Elsewhere from './components/layout/Elsewhere';
+
 
 const App = () => {
 
@@ -22,14 +20,10 @@ const App = () => {
         <Container>
           <Row><Col><Header /></Col></Row>
           <Row>
-            <Col sm={9} md={9}>
+            <Col>
               <Routes />
             </Col>
-            <Col sm={3} md={3} >
-              <Row><Col><About /></Col></Row>
-              <Row><Col><Archives /></Col></Row>
-              <Row><Col><Elsewhere /></Col></Row>
-            </Col>
+            
           </Row>
         </Container>
       </div>

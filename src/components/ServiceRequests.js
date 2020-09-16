@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 const ServiceRequests = () => {
   
-  const [users, setUsers] = useState([]);
+  const [blogposts, setBlogposts] = useState([]);
 
   async function fetchData() {
-    await fetch("http://localhost:8080/users/getuser/1", {
+    await fetch("http://localhost:8080/blogposts/get-blogpost/4", {
         method: "GET"
       })
         .then(response => response.json())
-        .then(data => {setUsers(data);console.log(data);})
+        .then(data => {setBlogposts(data);console.log(data);})
         .catch(error => console.error(error));
   }
 
@@ -19,7 +19,13 @@ const ServiceRequests = () => {
 
   
   return(
-    <div>{users.firstName}</div>
+    <div>
+      <h1>{blogposts.title}</h1>
+      
+      <h3>{blogposts.date}</h3>
+      <p> {blogposts.body} </p>
+      
+    </div>
   );
 
 }

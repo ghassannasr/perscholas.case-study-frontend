@@ -37,3 +37,13 @@ const Navigate = () => (
 );
 
 export default Navigate;
+
+
+{/* <Row>
+          <Col className="col-6">
+            <h1>Home Page</h1>
+            <div>
+              <h2>Welcome {props.loginForm.values.email}</h2>
+            This is a blog post that is long enough to illustrate the layout and the use of Bootstrap to optimize the responsive design</div>
+          </Col>
+        </Row> */}
