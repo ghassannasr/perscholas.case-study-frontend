@@ -11,6 +11,7 @@ const About = props => (
 
 const mapStateToProps = state => ({
   loginForm: state.loginForm
+  //loginReducer: state.loginForm
 });
 
 export default connect(mapStateToProps)(About);

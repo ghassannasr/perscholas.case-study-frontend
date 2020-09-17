@@ -20,13 +20,29 @@ const setErrors = (email, password) => {
   return errors;
 };
 
+
+const initialState = {
+  loginForm: {
+    values: {
+      email: "",
+      password: ""
+    },
+    errors: {
+      email: "",
+      password: ""
+    }
+  }
+};
+
+
 //I think this is the function that responds to the props.dispatch method
 //that is associated with a pages event trigger, in the case of LoginForm.js
 //the Submit button onClick handler (maybe it is better to associate the event 
-//handler with the form itself, so that pressing Enter would also trigger the method)
+//handler with the form itself, so that pressing Enter would also trigger the method.
+
 
 //TODO figure out a way to move everything in this file
-export default (state = {}, action) => {
+export default (state = initialState, action) => {
 
   if (action.type === "FORM_SUBMIT") {
     const { email, password } = action.payload;
