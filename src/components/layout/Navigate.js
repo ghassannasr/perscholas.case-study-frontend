@@ -26,7 +26,7 @@ const Navigate = () => (
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Link to="/">Home</Link>
-          <Link to="/servicerequests">Service</Link>
+          {/* <Link to="/servicerequests">Service</Link> */}
           <Link to="/about">About</Link>
           <Link to="/login">Login</Link>
         </Nav>

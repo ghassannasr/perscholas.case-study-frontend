@@ -5,7 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import About from './layout/About';
 import Blog from './layout/Blog';
 import Login from './Login';
-import ServiceRequests from './ServiceRequests';
+//import  from './Posts';
 
 class Routes extends Component {
 
@@ -15,7 +15,7 @@ class Routes extends Component {
         <Route path="/" exact component={Blog} />
         <Route path="/about" component={About} />
         <Route path="/login" component={Login} />
-        <Route path="/servicerequests" component={ServiceRequests} />
+        {/* <Route path="/servicerequests" component={ServiceRequests} /> */}
       </Switch>
     );
   }

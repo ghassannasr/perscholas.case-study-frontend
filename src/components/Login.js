@@ -69,10 +69,10 @@ const Login = props => {
   );
 };
 
+
 const mapStateToProps = state => ({
   loginForm: state.loginForm
 });
-
 //const mapDispatchToProps = check
 
 //mapStateToProps specifies what part of the redux store (properties) we want to expose as props to the component
