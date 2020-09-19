@@ -13,9 +13,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import store from "./store";
 import { Provider } from 'react-redux';
 
-
-
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

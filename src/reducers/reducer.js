@@ -31,7 +31,8 @@ const initialState = {
       email: "",
       password: ""
     }
-  }
+  },
+  blogPosts: []
 };
 
 
@@ -57,9 +58,22 @@ export default (state = initialState, action) => {
         errors
       }
     };
-    //console.log("Spread operator after " + JSON.stringify(newState));
+
     return newState;
+
   }
-  //console.log("Calling a blank reducer:" + JSON.stringify(state));
+
+  else if(action.type === "POPULATE_BLOGPOSTS") {
+    
+    const newPosts = action.payload;
+    const newState = { ...state,
+      blogPosts: newPosts
+    }
+
+    return newState;
+
+  }
+
   return state;
+
 };

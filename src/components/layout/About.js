@@ -6,11 +6,13 @@ const About = props => (
     <h4>About</h4>
     <h4>Welcome {props.loginForm.values.email}</h4>
     <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+    <h4>A BLOG POST {props.blogPosts.length}</h4>
   </div>
 );
 
 const mapStateToProps = state => ({
-  loginForm: state.loginForm
+  loginForm: state.loginForm,
+  blogPosts: state.blogPosts
   //loginReducer: state.loginForm
 });
 

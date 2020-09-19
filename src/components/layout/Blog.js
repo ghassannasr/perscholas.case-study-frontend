@@ -5,7 +5,7 @@ import About from './About';
 import Archives from './Archives';
 import Elsewhere from './Elsewhere';
 
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 
 
 const Blog = props => {
@@ -24,9 +24,9 @@ const Blog = props => {
 };
 
 
-const mapStateToProps = state => ({
-  loginForm: state.loginForm
-});
+// const mapStateToProps = state => ({
+//   loginForm: state.loginForm
+// });
 
 //const mapDispatchToProps = check
 
@@ -37,5 +37,5 @@ const mapStateToProps = state => ({
 //allows only relevant part of state to be exposed to this component
 //also, the connect function means don't need to explicitly subscribe or unsubscribe to the store
 //mapDispatchToProps specifies what actions we want to expose as props (instead of what state)
-export default connect(mapStateToProps)(Blog);
-//export default Home;
+//export default connect(mapStateToProps)(Blog);
+export default Blog;
