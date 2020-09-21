@@ -3,6 +3,11 @@ import React, { useState, useEffect } from 'react';
 import Post from './Post';
 import axios from 'axios';
 
+import Example from './layout/Test';
+
+//import { Editor } from 'react-draft-wysiwyg';
+//import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
 const Posts = (props) => {
 
   const [blogposts, setBlogposts] = useState([]);
@@ -17,7 +22,7 @@ const Posts = (props) => {
 
     axios.get("http://localhost:8080/blogposts/get-all-posts")
       .then(res => {
-        setBlogposts(res.data)
+        setBlogposts(res.data); console.log("THE REQUEST" + res.data);
       })
   }
 
@@ -28,14 +33,10 @@ const Posts = (props) => {
 
   function writeAuthors(posts) {
     var blogPostsArray = [];
+  
     if (posts !== undefined) {
-      for (var i in posts) {
-
-        blogPostsArray.push(
-          <Post key={posts[i].id} post={posts[i]} />
-        );
-      }
-
+      
+    blogPostsArray = posts.map(item => <Post key={item.id} post={item} />);
       //props.dispatch({ type: "POPULATE_BLOGPOSTS", payload: posts })
       return blogPostsArray;
     }
@@ -43,6 +44,7 @@ const Posts = (props) => {
       return (<h2>Loading ...</h2>);
 
   }
+
   return (
     <div>
       {writeAuthors(blogposts)}

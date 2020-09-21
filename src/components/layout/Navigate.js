@@ -29,6 +29,7 @@ const Navigate = () => (
           {/* <Link to="/servicerequests">Service</Link> */}
           <Link to="/about">About</Link>
           <Link to="/login">Login</Link>
+          {/* <Link to="/test">Test</Link> */}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
