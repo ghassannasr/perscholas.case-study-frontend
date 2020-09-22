@@ -21,6 +21,7 @@ const Posts = (props) => {
     //     .catch(error => console.error(error));
 
     axios.get("http://localhost:8080/blogposts/get-all-posts")
+    //axios.get("http://3.22.118.142:8080/blogposts/get-all-posts")
       .then(res => {
         setBlogposts(res.data); console.log("THE REQUEST" + res.data);
       })
@@ -35,8 +36,24 @@ const Posts = (props) => {
     var blogPostsArray = [];
   
     if (posts !== undefined) {
-      
-    blogPostsArray = posts.map(item => <Post key={item.id} post={item} />);
+
+    let postsMonth; 
+    let postsYear; 
+
+    if(props.monthyear === 'current') {
+      postsMonth = new Date().getMonth()+1;
+      postsYear = new Date().getFullYear();
+      console.log("THE YEAR IS CURRENT");
+    }
+    else {
+      postsMonth = props.monthyear.split("-")[0];
+      postsYear = props.monthyear.split("-")[1];
+    }
+    
+    blogPostsArray = posts.filter(item => 
+                                    (((new Date(item.date).getMonth()+1) === postsMonth) &&
+                                      (new Date(item.date).getFullYear() === postsYear)));
+    blogPostsArray = blogPostsArray.map(item => <Post key={item.id} post={item} />);
       //props.dispatch({ type: "POPULATE_BLOGPOSTS", payload: posts })
       return blogPostsArray;
     }

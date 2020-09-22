@@ -8,11 +8,13 @@ import Elsewhere from './Elsewhere';
 //import { connect } from 'react-redux';
 
 
-const Blog = props => {
+const Blog = (props) => {
+  const monthyear = props.match.params.monthyear;
+  
   return (
     <Row>
       <Col sm={9} md={9} >
-        <Posts />
+        <Posts monthyear={monthyear}/>
       </Col>
       <Col sm={3} md={3} >
         <Row><Col><About /></Col></Row>

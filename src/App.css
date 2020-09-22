@@ -168,3 +168,27 @@ h6, .h6 {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+
+/*
+ * Ghassan Nasr additions
+ */
+
+ .link-anchor-nav {
+  /* padding: 40px 0; */
+  font-size: 20px;
+  color: rgb(141, 106, 223);
+  margin-left: 10px;
+  margin-right: 10px;
+  /* text-align: center; */
+  /* background-color: #f9f9f9; */
+  /* border-top: 1px solid #e5e5e5; */
+}
+
+ .link-anchor-author {
+  padding: 40px 0;
+  color: rgb(90, 126, 89);
+  /* text-align: center; */
+  /* background-color: #f9f9f9; */
+  /* border-top: 1px solid #e5e5e5; */
+}

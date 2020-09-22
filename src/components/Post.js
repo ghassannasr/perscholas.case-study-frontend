@@ -1,7 +1,9 @@
 import React from "react";
 //import { connect } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import renderHTML from 'react-render-html';
 
 
 class Post extends React.Component {
@@ -46,6 +48,7 @@ class Post extends React.Component {
 
     //let postJson = updatedPost.json
     console.log("MY UPDATED POST " + JSON.stringify(updatedPost));
+    // axios.put("http://3.22.118.142:8080/blogposts/update-blogpost/" + this.state.postId, updatedPost)
     axios.put("http://localhost:8080/blogposts/update-blogpost/" + this.state.postId, updatedPost)
     .then(response => { 
       console.log("MY RESPONSE: " + response)
@@ -64,29 +67,32 @@ class Post extends React.Component {
 
   showPost() {
     return (
-      <div>
-        <h3>ID: {this.state.postId}</h3>
-        <h3>Title{this.state.postTitle}</h3>
-        <h4>Author: {this.state.postAuthorFirstName} {this.state.postAuthorLastName}</h4>
-        <h4>Date: {this.state.postDate}</h4>
-        { this.state.flag === "show-post" ?
-          <>
-          <p>{this.state.postBody}</p>
-          <Button onClick={this.editPost} variant="outline-secondary">Edit</Button>
-          </>
-          : 
-         <Form onSubmit={this.savePost}>
-          <Form.Control ref={this.postBodyRef} as="textarea" defaultValue={this.state.postBody} type="text" >
-          {/* {this.state.postBody} */}
-          </Form.Control>
-          <Button onClick={this.savePost} variant="outline-primary">Save</Button>
-        </Form>
-        }
-        {/* { this.state.flag === "show-post" ?
-          
-          : 
-         
-        } */}
+
+      <div className="col-sm-12 blog-main">
+
+        <div className="blog-post">
+          {/* <h3>ID: {this.state.postId}</h3> */}
+          <h2 className="blog-post-title">{this.state.postTitle}</h2>
+          <p className="blog-post-meta">Date: {this.state.postDate} by 
+          <Link className="link-anchor-author" to="#"> {this.state.postAuthorFirstName} {this.state.postAuthorLastName}</Link>
+           </p>
+          {this.state.flag === "show-post" ?
+            <>
+              <div>
+              {renderHTML(this.state.postBody)}
+              </div>
+              <Button onClick={this.editPost} variant="outline-secondary">Edit</Button>
+            </>
+            :
+            <Form onSubmit={this.savePost}>
+              <Form.Control ref={this.postBodyRef} as="textarea" defaultValue={this.state.postBody} type="text" >
+                {/* {this.state.postBody} */}
+              </Form.Control>
+              <Button onClick={this.savePost} variant="outline-primary">Save</Button>
+            </Form>
+          }
+          {/* { this.state.flag === "show-post" ? : } */}
+        </div>
       </div>
     )
   }
