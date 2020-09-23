@@ -1,10 +1,15 @@
 import React from 'react';
+import { Jumbotron, Container } from 'react-bootstrap';
 
 export default () => {
   return (
-    <div className="blog-header">
-      <h1 className="blog-title">Beirut Good Times</h1>
-      <p className="lead blog-description">A city I still call home.</p>
-    </div>
+    <Jumbotron fluid>
+      <Container>
+        <h1>The Lorem Ipsum Corner</h1>
+        <p>
+          Everything you ever wanted to know about Lorem Ipsum.
+    </p>
+      </Container>
+    </Jumbotron>
   );
 }

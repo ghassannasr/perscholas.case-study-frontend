@@ -46,13 +46,8 @@ class CreatePost extends React.Component {
       title: this.postTitleRef.current.value,
       body: this.postBodyRef.current.value,
       date: new Date().toDateString(),
-      //author_id: 1
-      author: {
-        id: 1,
-        // firstname: "Ghassan",
-        // lastname: "Nasr",
-        // type: "admin"
-      }
+      author_id: 1
+      
     }
     
     console.log("The new title is: " + newPost.title);

@@ -41,7 +41,7 @@ class Post extends React.Component {
       title: this.state.postTitle,
       body: this.postBodyRef.current.value,
       date: this.state.postDate,
-      //author_id: 1
+      author_id: 1
       // author: {
       //     id: this.state.postAuthorId,
       // }
