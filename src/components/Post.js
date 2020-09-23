@@ -16,9 +16,9 @@ class Post extends React.Component {
       postId: props.post.id,
       postTitle: props.post.title,
       postBody: props.post.body,
-      postAuthorId: props.post.author.id,
-      postAuthorFirstName: props.post.author.firstName,
-      postAuthorLastName: props.post.author.lastName,
+      //postAuthorId: props.post.author.id,
+      //postAuthorFirstName: props.post.author.firstName,
+      //postAuthorLastName: props.post.author.lastName,
       postDate: props.post.date
     }
 
@@ -41,9 +41,10 @@ class Post extends React.Component {
       title: this.state.postTitle,
       body: this.postBodyRef.current.value,
       date: this.state.postDate,
-      author: {
-          id: this.state.postAuthorId,
-      }
+      //author_id: 1
+      // author: {
+      //     id: this.state.postAuthorId,
+      // }
     }
 
     //let postJson = updatedPost.json

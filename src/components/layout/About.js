@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+//import Test from './Test';
 
 const About = props => (
+
   <div className="sidebar-module sidebar-module-inset">
     <h4>About</h4>
     <h4>Welcome {props.loginForm.values.email}</h4>

@@ -1,27 +1,15 @@
 import React, { useState, useEffect } from 'react';
-//import { connect } from 'react-redux';
 import Post from './Post';
 import axios from 'axios';
-
-import Example from './layout/Test';
-
-//import { Editor } from 'react-draft-wysiwyg';
-//import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import CreatePost from './CreatePost';
 
 const Posts = (props) => {
 
   const [blogposts, setBlogposts] = useState([]);
 
   async function fetchData() {
-    // await fetch("http://localhost:8080/blogposts/get-all-posts", {
-    //       method: "GET"
-    //   })
-    //     .then(response => response.json())
-    //     .then(data => {setBlogposts(data); console.log(data);})
-    //     .catch(error => console.error(error));
-
     axios.get("http://localhost:8080/blogposts/get-all-posts")
-    //axios.get("http://3.22.118.142:8080/blogposts/get-all-posts")
+      //axios.get("http://3.22.118.142:8080/blogposts/get-all-posts")
       .then(res => {
         setBlogposts(res.data); console.log("THE REQUEST" + res.data);
       })
@@ -32,29 +20,25 @@ const Posts = (props) => {
   }, []);
 
 
-  function writeAuthors(posts) {
+  function writePosts(posts) {
     var blogPostsArray = [];
-  
-    if (posts !== undefined) {
 
-    let postsMonth; 
-    let postsYear; 
+    if(posts.length !== 0) {
+    //if (posts !== undefined) {
+      console.log("THE POSTS ARE " + JSON.stringify(posts));
 
-    if(props.monthyear === 'current') {
-      postsMonth = new Date().getMonth()+1;
-      postsYear = new Date().getFullYear();
-      console.log("THE YEAR IS CURRENT");
-    }
-    else {
-      postsMonth = props.monthyear.split("-")[0];
-      postsYear = props.monthyear.split("-")[1];
-    }
-    
-    blogPostsArray = posts.filter(item => 
-                                    (((new Date(item.date).getMonth()+1) === postsMonth) &&
-                                      (new Date(item.date).getFullYear() === postsYear)));
-    blogPostsArray = blogPostsArray.map(item => <Post key={item.id} post={item} />);
-      //props.dispatch({ type: "POPULATE_BLOGPOSTS", payload: posts })
+      let postsMonth = props.monthyear === 'current' ? new Date().getMonth() + 1
+        : props.monthyear.split("-")[0];
+
+      let postsYear = props.monthyear === 'current' ? new Date().getFullYear()
+        : props.monthyear.split("-")[1];
+
+
+      blogPostsArray = posts.filter(item =>
+        (((new Date(item.date).getMonth() + 1) === postsMonth) &&
+          (new Date(item.date).getFullYear() === postsYear)));
+      console.log("THE LENGTH OF THE ARRAY IS " + blogPostsArray.length);
+      blogPostsArray = blogPostsArray.map(item => <Post key={item.id} post={item} />);
       return blogPostsArray;
     }
     else
@@ -64,7 +48,8 @@ const Posts = (props) => {
 
   return (
     <div>
-      {writeAuthors(blogposts)}
+      <CreatePost />
+      {writePosts(blogposts)}
     </div>
   )
 
