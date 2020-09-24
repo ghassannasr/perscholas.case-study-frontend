@@ -24,10 +24,12 @@ class Post extends React.Component {
 
     this.editPost = this.editPost.bind(this);
     this.savePost = this.savePost.bind(this);
+    //this.deletPost = this.deletPost.bind(this);
 
   }
 
   postBodyRef = React.createRef();
+  postTitleRef = React.createRef();
 
   savePost(e) {
     e.preventDefault();
@@ -35,10 +37,11 @@ class Post extends React.Component {
     
     //console.log("THE NEW POST TEXT IS: " + this.postBodyRef.current.value)
     this.setState(state => ({postBody: this.postBodyRef.current.value}));
+    this.setState(state => ({postTitle: this.postTitleRef.current.value}));
 
     let updatedPost = {
       id: this.state.postId,
-      title: this.state.postTitle,
+      title: this.postTitleRef.current.value,
       body: this.postBodyRef.current.value,
       date: this.state.postDate,
       author_id: 1
@@ -84,8 +87,11 @@ class Post extends React.Component {
               </div>
               <Button onClick={this.editPost} variant="outline-secondary">Edit</Button>
             </>
-            :
+            : //if state is edit-post
             <Form onSubmit={this.savePost}>
+              <Form.Label>Blog Post Title:</Form.Label>
+              <Form.Control ref={this.postTitleRef} defaultValue={this.state.postTitle} type="text" ></Form.Control>
+              <Form.Label>Blog Post Body:</Form.Label>
               <Form.Control ref={this.postBodyRef} as="textarea" defaultValue={this.state.postBody} type="text" >
                 {/* {this.state.postBody} */}
               </Form.Control>
