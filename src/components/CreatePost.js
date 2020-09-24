@@ -46,7 +46,14 @@ class CreatePost extends React.Component {
       title: this.postTitleRef.current.value,
       body: this.postBodyRef.current.value,
       date: new Date().toLocaleString(),
-      author_id: 1
+      author: {
+        "id": 1,
+        "firstname": "Ghassan",
+        "lastname": "Nasr",
+        "type": "admin",
+        "username": "lorem",
+        "password": "ipsum"
+      }
       
     }
     

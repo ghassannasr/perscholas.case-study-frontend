@@ -1,5 +1,5 @@
 import React from "react";
-//import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -19,7 +19,8 @@ class Post extends React.Component {
       //postAuthorId: props.post.author.id,
       //postAuthorFirstName: props.post.author.firstName,
       //postAuthorLastName: props.post.author.lastName,
-      postDate: props.post.date
+      postDate: props.post.date,
+      //adminIndex: props.login.adminIndex
     }
 
     this.editPost = this.editPost.bind(this);
@@ -39,12 +40,14 @@ class Post extends React.Component {
     this.setState(state => ({postBody: this.postBodyRef.current.value}));
     this.setState(state => ({postTitle: this.postTitleRef.current.value}));
 
+    
+    //let loggedInAdmin = props.login.admins[this.state.adminIndex];
     let updatedPost = {
       id: this.state.postId,
       title: this.postTitleRef.current.value,
       body: this.postBodyRef.current.value,
       date: this.state.postDate,
-      author_id: 1
+      author_id: 1// props.admins[props.login.adminIndex][0]//1
       // author: {
       //     id: this.state.postAuthorId,
       // }
@@ -76,9 +79,6 @@ class Post extends React.Component {
 
         <div className="blog-post">
           {/* <h3>ID: {this.state.postId}</h3> */}
-          
-           
-          
           {this.state.flag === "show-post" ?
             <>
               <div>
@@ -112,4 +112,9 @@ class Post extends React.Component {
     }
 }
   
-export default Post;
+const mapStateToProps = state => ({
+  login: state.login,
+  admins: state.admins
+});
+
+export default connect(mapStateToProps)(Post);
