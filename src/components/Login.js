@@ -12,8 +12,16 @@ const Login = props => {
   async function fetchData() {
     axios.get("http://localhost:8080/authors/get-authors-of-type/admin")
       //axios.get("http://3.22.118.142:8080/blogposts/get-all-posts")
-      .then(res => {
-        console.log("THE REQUEST" + res.data[0].firstname);
+      .then(response => {
+        //console.log("THE REQUEST" + response.data);
+        // let firstname = res.data[0].firstname;
+        let username = response.data[0].username;
+        let type = response.data[0].type;
+        console.log("THE ADMIN IS " + username + " " + type);
+        let adminList = response.data;
+        props.dispatch({ type: "ADMIN_RETRIEVE", payload: { adminList } });
+        //props.dispatch({ type: "FORM_SUBMIT", payload: { username, password } });
+        
       })
   }
 
@@ -32,15 +40,12 @@ const Login = props => {
         <Form.Control
           type="username"
           placeholder="Enter username"
-          isInvalid={props.loginForm.errors.username.length > 0}
-          isValid={
-            props.loginForm.values.username &&
-            props.loginForm.errors.username.length === 0
-          }
+          isInvalid={ props.login.adminIndex === "" }
+          isValid={ props.login.adminIndex !== "" }
           onChange={e => setUsername(e.target.value)}
         />
         <Form.Control.Feedback type="invalid">
-          {props.loginForm.errors.username}
+          {props.login.loginMessage}
         </Form.Control.Feedback>
         <Form.Text className="text-muted">
           We'll never share your username with anyone else.
@@ -52,15 +57,12 @@ const Login = props => {
         <Form.Control
           type="password"
           placeholder="Password"
-          isInvalid={props.loginForm.errors.password.length > 0}
-          isValid={
-            props.loginForm.values.password &&
-            props.loginForm.errors.password.length === 0
-          }
+          isInvalid={ props.login.adminIndex === "" }
+          isValid={ props.login.adminIndex !== "" }
           onChange={e => setPassword(e.target.value)}
         />
         <Form.Control.Feedback type="invalid">
-          {props.loginForm.errors.password}
+          {props.login.loginMessage}
         </Form.Control.Feedback>
       </Form.Group>
       <Form.Group controlId="formBasicCheckbox">
@@ -84,7 +86,8 @@ const Login = props => {
 
 
 const mapStateToProps = state => ({
-  loginForm: state.loginForm
+  login: state.login,
+  admins: state.admins
 });
 //const mapDispatchToProps = check
 
