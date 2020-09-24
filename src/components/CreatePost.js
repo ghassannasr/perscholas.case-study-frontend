@@ -45,7 +45,7 @@ class CreatePost extends React.Component {
       //id: this.state.postId,
       title: this.postTitleRef.current.value,
       body: this.postBodyRef.current.value,
-      date: new Date().toDateString(),
+      date: new Date().toLocaleString(),
       author_id: 1
       
     }
@@ -87,14 +87,16 @@ newPost() {
       {this.state.flag === "save-post"
         ?
         <Form onSubmit={this.savePost}>
-          <Form.Control ref={this.postTitleRef} as="textarea" defaultValue={this.state.errors.postTitleError} type="text" />
-          <Form.Control ref={this.postBodyRef} as="textarea" defaultValue={this.state.errors.postBodyError} type="text" />
+          <Form.Control ref={this.postTitleRef} as="textarea" placeholder={this.state.errors.postTitleError} type="text" />
+          <Form.Control ref={this.postBodyRef} as="textarea" placeholder={this.state.errors.postBodyError} type="text" />
+          <div className="text-right">
           <Button onClick={this.savePost} variant="outline-primary">Save</Button>
+          </div>
         </Form>
         : //else if prompt for post
         <>
-          <div>
-            <Button onClick={this.promptForPost} variant="outline-secondary">Add New Post</Button>
+          <div className="text-right">
+              <Button onClick={this.promptForPost} variant="outline-secondary" >Add New Post</Button>
           </div>
         </>
 

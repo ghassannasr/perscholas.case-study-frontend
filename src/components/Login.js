@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button } from "react-bootstrap";
+import axios from 'axios';
 
 import { connect } from 'react-redux';
 
 const Login = props => {
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  async function fetchData() {
+    axios.get("http://localhost:8080/authors/get-authors-of-type/admin")
+      //axios.get("http://3.22.118.142:8080/blogposts/get-all-posts")
+      .then(res => {
+        console.log("THE REQUEST" + res.data[0].firstname);
+      })
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="row">
@@ -15,22 +28,22 @@ const Login = props => {
       <h2>Login</h2>
       <hr />
       <Form.Group controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
+        <Form.Label>Username</Form.Label>
         <Form.Control
-          type="email"
-          placeholder="Enter email"
-          isInvalid={props.loginForm.errors.email.length > 0}
+          type="username"
+          placeholder="Enter username"
+          isInvalid={props.loginForm.errors.username.length > 0}
           isValid={
-            props.loginForm.values.email &&
-            props.loginForm.errors.email.length === 0
+            props.loginForm.values.username &&
+            props.loginForm.errors.username.length === 0
           }
-          onChange={e => setEmail(e.target.value)}
+          onChange={e => setUsername(e.target.value)}
         />
         <Form.Control.Feedback type="invalid">
-          {props.loginForm.errors.email}
+          {props.loginForm.errors.username}
         </Form.Control.Feedback>
         <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
+          We'll never share your username with anyone else.
         </Form.Text>
       </Form.Group>
 
@@ -57,7 +70,7 @@ const Login = props => {
         variant="primary"
         type="button"
         onClick={() =>
-          props.dispatch({ type: "FORM_SUBMIT", payload: { email, password } })
+          props.dispatch({ type: "FORM_SUBMIT", payload: { username, password } })
         }
       >
         Submit

@@ -23,9 +23,9 @@ const Posts = (props) => {
   function writePosts(posts) {
     var blogPostsArray = [];
 
-    if(posts.length !== 0) {
-    //if (posts !== undefined) {
-      console.log("THE POSTS ARE " + JSON.stringify(posts));
+    if (posts.length !== 0) {
+      //if (posts !== undefined) {
+      //console.log("THE POSTS ARE " + JSON.stringify(posts));
 
       let postsMonth = props.monthyear === 'current' ? new Date().getMonth() + 1
         : props.monthyear.split("-")[0];
@@ -37,8 +37,11 @@ const Posts = (props) => {
       blogPostsArray = posts.filter(item =>
         (((new Date(item.date).getMonth() + 1) === postsMonth) &&
           (new Date(item.date).getFullYear() === postsYear)));
-      console.log("THE LENGTH OF THE ARRAY IS " + blogPostsArray.length);
+      //console.log("MILLISECONDS " + (blogPostsArray[0].date).getTime());
+      blogPostsArray.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+      //blogPostsArray.map(item => ({ ...item, date: new Date(item.date).toLocaleString()}));
       blogPostsArray = blogPostsArray.map(item => <Post key={item.id} post={item} />);
+
       return blogPostsArray;
     }
     else

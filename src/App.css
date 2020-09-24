@@ -1,5 +1,23 @@
 /* stylelint-disable selector-list-comma-newline-after, property-no-vendor-prefix */
+/*
+Ghassan Nasr additions
+*/
+body {
+  /*font-family: 'Roboto', sans-serif;*/
+  font-family: 'Special Elite', cursive;
+}
 
+.gn-header-jumbotron {
+  background-image: url("./images/lorem_ipsum_gallery.jpeg");
+  height: 300px;
+  width: 100%;
+  margin-top: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 10px;
+  opacity: 30%;
+}
 /*
  * Globals
  */

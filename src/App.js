@@ -18,6 +18,7 @@ const App = () => {
           <Navigate />
         </Container>
         <Container>
+          <Row><Col><div height="30px"></div></Col></Row>
           <Row><Col><Header /></Col></Row>
           <Row>
             <Col>

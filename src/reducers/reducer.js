@@ -1,16 +1,16 @@
 
 
-function validateEmail(email) {
+function validateUsername(username) {
   var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
+  return re.test(String(username).toLowerCase());
 }
 
-const setErrors = (email, password) => {
-  let errors = { email: "", password: "" };
-  if (!email && email.length === 0) {
-    errors.email = "Email is required";
-  } else if (!validateEmail(email)) {
-    errors.email = "Email is invalid";
+const setErrors = (username, password) => {
+  let errors = { username: "", password: "" };
+  if (!username && username.length === 0) {
+    errors.username = "Email is required";
+  } else if (!validateUsername(username)) {
+    errors.username = "Email is invalid";
   }
   if (!password && password.length === 0) {
     errors.password = "Password is required";
@@ -24,11 +24,11 @@ const setErrors = (email, password) => {
 const initialState = {
   loginForm: {
     values: {
-      email: "",
+      username: "",
       password: ""
     },
     errors: {
-      email: "",
+      username: "",
       password: ""
     }
   },
@@ -46,12 +46,12 @@ const initialState = {
 export default (state = initialState, action) => {
 
   if (action.type === "FORM_SUBMIT") {
-    const { email, password } = action.payload;
+    const { username, password } = action.payload;
     const values = {
-      email,
+      username,
       password
     };
-    const errors = setErrors(email, password); // validate fields
+    const errors = setErrors(username, password); // validate fields
     const newState = { ...state,
       loginForm: {
         values,
