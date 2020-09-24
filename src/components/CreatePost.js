@@ -87,7 +87,9 @@ newPost() {
       {this.state.flag === "save-post"
         ?
         <Form onSubmit={this.savePost}>
-          <Form.Control ref={this.postTitleRef} as="textarea" placeholder={this.state.errors.postTitleError} type="text" />
+          <Form.Label>Blog Post Title:</Form.Label>
+          <Form.Control ref={this.postTitleRef} placeholder={this.state.errors.postTitleError} type="text" />
+          <Form.Label>Blog Post Body:</Form.Label>
           <Form.Control ref={this.postBodyRef} as="textarea" placeholder={this.state.errors.postBodyError} type="text" />
           <div className="text-right">
           <Button onClick={this.savePost} variant="outline-primary">Save</Button>

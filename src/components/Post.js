@@ -76,13 +76,16 @@ class Post extends React.Component {
 
         <div className="blog-post">
           {/* <h3>ID: {this.state.postId}</h3> */}
-          <h2 className="blog-post-title">{this.state.postTitle}</h2>
-          <p className="blog-post-meta">Date: {this.state.postDate} by 
-          <Link className="link-anchor-author" to="#"> {this.state.postAuthorFirstName} {this.state.postAuthorLastName}</Link>
-           </p>
+          
+           
+          
           {this.state.flag === "show-post" ?
             <>
               <div>
+              <h2 className="blog-post-title">{this.state.postTitle}</h2>
+              <p className="blog-post-meta">Date: {this.state.postDate} by 
+              <Link className="link-anchor-author" to="#"> {this.state.postAuthorFirstName} {this.state.postAuthorLastName}</Link>
+              </p>
               {renderHTML(this.state.postBody)}
               </div>
               <Button onClick={this.editPost} variant="outline-secondary">Edit</Button>
