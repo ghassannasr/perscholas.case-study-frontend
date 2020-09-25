@@ -25,7 +25,7 @@ class Post extends React.Component {
 
     this.editPost = this.editPost.bind(this);
     this.savePost = this.savePost.bind(this);
-    //this.deletPost = this.deletPost.bind(this);
+    //this.deletePost = this.deletePost.bind(this);
 
   }
 
@@ -47,10 +47,14 @@ class Post extends React.Component {
       title: this.postTitleRef.current.value,
       body: this.postBodyRef.current.value,
       date: this.state.postDate,
-      author_id: 1// props.admins[props.login.adminIndex][0]//1
-      // author: {
-      //     id: this.state.postAuthorId,
-      // }
+      author: {
+        "id": 1,
+        "firstname": "Ghassan",
+        "lastname": "Nasr",
+        "type": "admin",
+        "username": "lorem",
+        "password": "ipsum"
+      }
     }
 
     //let postJson = updatedPost.json
@@ -58,7 +62,8 @@ class Post extends React.Component {
     // axios.put("http://3.22.118.142:8080/blogposts/update-blogpost/" + this.state.postId, updatedPost)
     axios.put("http://localhost:8080/blogposts/update-blogpost/" + this.state.postId, updatedPost)
     .then(response => { 
-      console.log("MY RESPONSE: " + response)
+      console.log("MY RESPONSE: " + response);
+      //this.props.refreshPosts();
     })
     .catch(error => {
         console.log("MY ERROR: " + error.response)
@@ -66,6 +71,7 @@ class Post extends React.Component {
 
 
   }
+  
   
   editPost() {
     this.setState(state => ({flag: "edit-post"}));
@@ -88,10 +94,13 @@ class Post extends React.Component {
               </p>
               {renderHTML(this.state.postBody)}
               </div>
+              
               <Button onClick={this.editPost} variant="outline-secondary">Edit</Button>
+              <Button value={this.state.postId} onClick={this.props.delete} variant="outline-secondary">Delete</Button>
+    
             </>
-            : //if state is edit-post
-            <Form onSubmit={this.savePost}>
+            : (this.state.flag === "edit-post" ?
+            <Form >
               <Form.Label>Blog Post Title:</Form.Label>
               <Form.Control ref={this.postTitleRef} defaultValue={this.state.postTitle} type="text" ></Form.Control>
               <Form.Label>Blog Post Body:</Form.Label>
@@ -100,6 +109,8 @@ class Post extends React.Component {
               </Form.Control>
               <Button onClick={this.savePost} variant="outline-primary">Save</Button>
             </Form>
+            : {}
+            )
           }
           {/* { this.state.flag === "show-post" ? : } */}
         </div>

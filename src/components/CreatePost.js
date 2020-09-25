@@ -57,13 +57,14 @@ class CreatePost extends React.Component {
       
     }
     
-    console.log("The new title is: " + newPost.title);
-    console.log("The new body is: " + newPost.body);
-    console.log("The new date is: " + newPost.date);
+    // console.log("The new title is: " + newPost.title);
+    // console.log("The new body is: " + newPost.body);
+    // console.log("The new date is: " + newPost.date);
     axios.post("http://localhost:8080/blogposts/create-blogpost/", newPost)
     .then(response => { 
       console.log("MY RESPONSE: " + response.data);
-      this.setState(state => ({flag: "prompt-for-post"}));  
+      this.setState(state => ({flag: "prompt-for-post"}));
+      this.props.refreshPosts(); 
     })
     .catch(error => {
         console.log("MY ERROR: " + error.response);
@@ -98,14 +99,15 @@ newPost() {
           <Form.Control ref={this.postTitleRef} placeholder={this.state.errors.postTitleError} type="text" />
           <Form.Label>Blog Post Body:</Form.Label>
           <Form.Control ref={this.postBodyRef} as="textarea" placeholder={this.state.errors.postBodyError} type="text" />
-          <div className="text-right">
+          <div className="text-left">
           <Button onClick={this.savePost} variant="outline-primary">Save</Button>
           </div>
         </Form>
         : //else if prompt for post
         <>
           <div className="text-right">
-              <Button onClick={this.promptForPost} variant="outline-secondary" >Add New Post</Button>
+            {/* <Button onClick={this.props.refresh} variant="outline-secondary" >Refresh Posts</Button> */}
+            <Button onClick={this.promptForPost} variant="outline-secondary" >Add New Post</Button>
           </div>
         </>
 
