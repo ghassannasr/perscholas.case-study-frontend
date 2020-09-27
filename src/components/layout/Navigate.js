@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container } from 'react-bootstrap';
+//import { Container } from 'react-bootstrap';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -20,44 +20,35 @@ const Navigate = (props) => {
         tried this below:
         <Nav.Link><NavLink to="/about">About</NavLink></Nav.Link>
     */
-    const currMonth = new Date().getMonth() + 1;
-    const currYear = new Date().getFullYear();
-    const monthyear = {month: currMonth, year: currYear};
-        return (
+  // const currMonth = new Date().getMonth() + 1;
+  // const currYear = new Date().getFullYear();
+  // const monthyear = { month: currMonth, year: currYear };
+  return (
     <Navbar fixed="top" bg="light" expand="sm">
-      <Navbar.Brand href="/"><h4>{props.login.username}</h4></Navbar.Brand>
+      <Navbar.Brand href="/">LoremIpsum</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Link className="link-anchor-nav" to='/blog/current'>Blog
-          </Link>
-          {/* <Link to="/servicerequests">Service</Link> */}
-          <Link className="link-anchor-nav" to="/about">About</Link>
-          <Link className="link-anchor-nav" to="/login">Login</Link>
-          <h4>{props.login.username}</h4>
-          {/* <Link to="/test">Test</Link> */}
+          <Nav.Link as={Link} to='/blog/current'>Blog</Nav.Link>
+      
+        {/* <Link className="link-anchor-nav" to='/blog/current'>Blog</Link> */}
+          <Nav.Link as={Link} to="/login" >Login</Nav.Link>
+          <Navbar.Text className="mr-sm-2">
+            {
+              props.login.adminIndex !== "" && props.login.adminIndex !== "error"
+              ? (props.admins)[0].firstname 
+              : ""
+            }
+          </Navbar.Text>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-    );
+  );
+};
 
-  
-    };
+const mapStateToProps = state => ({
+  login: state.login,
+  admins: state.admins
+});
 
-    const mapStateToProps = state => ({
-      login: state.login,
-      //blogPosts: state.blogPosts
-      //loginReducer: state.loginForm
-    });
-    
 export default connect(mapStateToProps)(Navigate);
-
-
-{/* <Row>
-          <Col className="col-6">
-            <h1>Home Page</h1>
-            <div>
-              <h2>Welcome {props.loginForm.values.email}</h2>
-            This is a blog post that is long enough to illustrate the layout and the use of Bootstrap to optimize the responsive design</div>
-          </Col>
-        </Row> */}

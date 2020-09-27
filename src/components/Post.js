@@ -95,8 +95,17 @@ class Post extends React.Component {
               {renderHTML(this.state.postBody)}
               </div>
               
-              <Button onClick={this.editPost} variant="outline-secondary">Edit</Button>
-              <Button value={this.state.postId} onClick={this.props.delete} variant="outline-secondary">Delete</Button>
+
+              {this.props.login.adminIndex !== "" && this.props.login.adminIndex !== "error" 
+                ? 
+                <>
+                <Button onClick={this.editPost} variant="outline-secondary">Edit</Button>
+                <Button value={this.state.postId} onClick={this.props.delete} variant="outline-secondary">Delete</Button> 
+                </>
+                
+                : ""}
+              {/* <Button onClick={this.editPost} variant="outline-secondary">Edit</Button>
+              <Button value={this.state.postId} onClick={this.props.delete} variant="outline-secondary">Delete</Button> */}
     
             </>
             : (this.state.flag === "edit-post" ?

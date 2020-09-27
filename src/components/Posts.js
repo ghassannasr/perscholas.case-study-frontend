@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Post from './Post';
 import axios from 'axios';
 import CreatePost from './CreatePost';
-import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 const Posts = (props) => {
 
@@ -15,7 +14,7 @@ const Posts = (props) => {
       //axios.get("http://3.22.118.142:8080/blogposts/get-all-posts")
       .then(res => {
         setBlogposts(res.data);
-        console.log("THIS MANY POSTS RETRIEVED " + res.data.length);
+        //console.log("THIS MANY POSTS RETRIEVED " + res.data.length);
       })
   }
 
@@ -25,14 +24,14 @@ const Posts = (props) => {
 
   function refreshPosts() {
     setRefreshCount(refreshCount + 1);
-    console.log("IN THE REFRESH" + refreshCount);
+    //console.log("IN THE REFRESH" + refreshCount);
   }
 
   
   function writePosts(posts) {
     var blogPostsArray = [];
 
-    console.log("THIS MANY POSTS " + posts.length);
+    // console.log("THIS MANY POSTS " + posts.length);
     if (posts.length !== 0) {
       //if (posts !== undefined) {
       //console.log("THE POSTS ARE " + JSON.stringify(posts));
@@ -66,34 +65,30 @@ const Posts = (props) => {
 
     axios.delete("http://localhost:8080/blogposts/delete-blogpost/" + postId)
     .then(response => { 
-      //this.setState(state => ({flag: "deleted-post"}));
       refreshPosts();
-      //console.log("MY DELETE RESPONSE: " + response.data)
     })
     .catch(error => {
-        //console.log("MY ERROR: " + error.response)
     });
   }
 
-  // function refreshPosts() {
-  //   setRefreshCount(refreshCount + 1);
-  // }
-
+ 
   return (
     <div>
-      {/* <CreatePost refresh={refreshPosts}/> */}
-      <CreatePost refreshPosts={refreshPosts} />
-      {/* <Button onClick={refreshPosts}>Refresh</Button> */}
+      {
+        props.login.adminIndex !== "" && props.login.adminIndex !== "error" 
+        ? <CreatePost refreshPosts={refreshPosts} /> 
+        : ""
+      }
       {writePosts(blogposts)}
-      {/* {retrieveAndWritePosts()} */}
     </div>
   )
 
 }
 
-// const mapStateToProps = state => ({
-//   blogPosts: state.blogPosts
-// });
+const mapStateToProps = state => ({
+  login: state.login,
+  admins: state.admins
+});
 
-//export default connect(mapStateToProps)(Posts);
-export default Posts;
+  export default connect(mapStateToProps)(Posts);
+//export default Posts;

@@ -13,21 +13,19 @@ const Login = props => {
     axios.get("http://localhost:8080/authors/get-authors-of-type/admin")
       //axios.get("http://3.22.118.142:8080/blogposts/get-all-posts")
       .then(response => {
-        //console.log("THE REQUEST" + response.data);
-        // let firstname = res.data[0].firstname;
-        let username = response.data[0].username;
-        let type = response.data[0].type;
-        console.log("THE ADMIN IS " + username + " " + type);
         let adminList = response.data;
         props.dispatch({ type: "ADMIN_RETRIEVE", payload: { adminList } });
-        //props.dispatch({ type: "FORM_SUBMIT", payload: { username, password } });
-        
       })
+      .catch(error => {
+        console.log(error);// some error handling
+      });
   }
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   return (
     <div className="row">
@@ -35,39 +33,48 @@ const Login = props => {
     <Form>
       <h2>Login</h2>
       <hr />
+      { 
+        props.login.loginMessage !== "" 
+        ? 
+        <Form.Text>{props.login.loginMessage}<hr /></Form.Text> 
+        : <Form.Text>Please enter your administrator credentials:<hr /></Form.Text>
+      }
       <Form.Group controlId="formBasicEmail">
-        <Form.Label>Username</Form.Label>
+        <Form.Label>Username:</Form.Label>
         <Form.Control
           type="username"
           placeholder="Enter username"
-          isInvalid={ props.login.adminIndex === "" }
+          isInvalid={ props.login.adminIndex === "error" }
           isValid={ props.login.adminIndex !== "" }
           onChange={e => setUsername(e.target.value)}
         />
-        <Form.Control.Feedback type="invalid">
+        {/* <Form.Control.Feedback type="valid">
           {props.login.loginMessage}
-        </Form.Control.Feedback>
-        <Form.Text className="text-muted">
+        </Form.Control.Feedback> */}
+        {/* <Form.Text className="text-muted">
           We'll never share your username with anyone else.
-        </Form.Text>
+        </Form.Text> */}
       </Form.Group>
 
       <Form.Group controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
+        <Form.Label>Password:</Form.Label>
         <Form.Control
           type="password"
-          placeholder="Password"
-          isInvalid={ props.login.adminIndex === "" }
+          placeholder="Enter password"
+          isInvalid={ props.login.adminIndex === "error" }
           isValid={ props.login.adminIndex !== "" }
           onChange={e => setPassword(e.target.value)}
         />
-        <Form.Control.Feedback type="invalid">
+        {/* <Form.Control.Feedback type="invalid">
           {props.login.loginMessage}
         </Form.Control.Feedback>
+        <Form.Control.Feedback type="valid">
+          {props.login.loginMessage}
+        </Form.Control.Feedback> */}
       </Form.Group>
-      <Form.Group controlId="formBasicCheckbox">
+      {/* <Form.Group controlId="formBasicCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
+      </Form.Group> */}
       <Button
         variant="primary"
         type="button"
