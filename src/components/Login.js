@@ -1,6 +1,8 @@
+
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from "react-bootstrap";
 import axios from 'axios';
+import Constants from '../constants';
 
 import { connect } from 'react-redux';
 
@@ -10,7 +12,7 @@ const Login = props => {
   const [password, setPassword] = useState("");
 
   async function fetchData() {
-    axios.get("http://localhost:8080/authors/get-authors-of-type/admin")
+    axios.get(`${Constants.BLOG_DATA_API_URL}:${Constants.BLOG_DATA_API_PORT}/authors/get-authors-of-type/admin`)
       //axios.get("http://3.22.118.142:8080/blogposts/get-all-posts")
       .then(response => {
         let adminList = response.data;
@@ -60,6 +62,7 @@ const Login = props => {
         <Form.Label>Password:</Form.Label>
         <Form.Control
           type="password"
+          autoComplete="off"
           placeholder="Enter password"
           isInvalid={ props.login.adminIndex === "error" }
           isValid={ props.login.adminIndex !== "" }

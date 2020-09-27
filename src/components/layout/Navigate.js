@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 //import {NavLink} from 'react-router-bootstrap'
 
 
+
 const Navigate = (props) => {
   /*
      with Navbar: 
@@ -28,19 +29,20 @@ const Navigate = (props) => {
       <Navbar.Brand href="/">LoremIpsum</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
+        <Nav >
           <Nav.Link as={Link} to='/blog/current'>Blog</Nav.Link>
-      
+          </Nav>
         {/* <Link className="link-anchor-nav" to='/blog/current'>Blog</Link> */}
-          <Nav.Link as={Link} to="/login" >Login</Nav.Link>
-          <Navbar.Text className="mr-sm-2">
+         <Nav className="mr-auto"> <Nav.Link as={Link} to="/login">Login</Nav.Link></Nav>
+          
+        
+        <Navbar.Text className="mr-auto">
             {
               props.login.adminIndex !== "" && props.login.adminIndex !== "error"
-              ? (props.admins)[0].firstname 
+              ? "Logged in as: " + (props.admins)[0].firstname 
               : ""
             }
-          </Navbar.Text>
-        </Nav>
+        </Navbar.Text>
       </Navbar.Collapse>
     </Navbar>
   );

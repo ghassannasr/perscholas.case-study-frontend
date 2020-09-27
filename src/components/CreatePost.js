@@ -4,6 +4,7 @@ import { Button, Form } from 'react-bootstrap';
 //import { Link } from 'react-router-dom';
 import axios from 'axios';
 //import renderHTML from 'react-render-html';
+import Constants from "../constants";
 
 
 class CreatePost extends React.Component {
@@ -60,9 +61,10 @@ class CreatePost extends React.Component {
     // console.log("The new title is: " + newPost.title);
     // console.log("The new body is: " + newPost.body);
     // console.log("The new date is: " + newPost.date);
-    axios.post("http://localhost:8080/blogposts/create-blogpost/", newPost)
+    console.log(process.env.REACT_APP_BACK_END_SERVICE_IP);
+    axios.post(`${Constants.BLOG_DATA_API_URL}:${Constants.BLOG_DATA_API_PORT}/blogposts/create-blogpost/`, newPost)
     .then(response => { 
-      console.log("MY RESPONSE: " + response.data);
+      //console.log("MY RESPONSE: " + response.data);
       this.setState(state => ({flag: "prompt-for-post"}));
       this.props.refreshPosts(); 
     })

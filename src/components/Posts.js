@@ -3,6 +3,7 @@ import Post from './Post';
 import axios from 'axios';
 import CreatePost from './CreatePost';
 import { connect } from 'react-redux';
+import Constants from '../constants';
 
 const Posts = (props) => {
 
@@ -10,11 +11,9 @@ const Posts = (props) => {
   const [refreshCount, setRefreshCount] = useState(0);
 
   async function fetchData() {
-    axios.get("http://localhost:8080/blogposts/get-all-posts")
-      //axios.get("http://3.22.118.142:8080/blogposts/get-all-posts")
+    axios.get(`${Constants.BLOG_DATA_API_URL}:${Constants.BLOG_DATA_API_PORT}/blogposts/get-all-posts`)
       .then(res => {
         setBlogposts(res.data);
-        //console.log("THIS MANY POSTS RETRIEVED " + res.data.length);
       })
   }
 
@@ -31,7 +30,6 @@ const Posts = (props) => {
   function writePosts(posts) {
     var blogPostsArray = [];
 
-    // console.log("THIS MANY POSTS " + posts.length);
     if (posts.length !== 0) {
       //if (posts !== undefined) {
       //console.log("THE POSTS ARE " + JSON.stringify(posts));
@@ -63,7 +61,7 @@ const Posts = (props) => {
 
     let postId = e.target.value;
 
-    axios.delete("http://localhost:8080/blogposts/delete-blogpost/" + postId)
+    axios.delete(`${Constants.BLOG_DATA_API_URL}:${Constants.BLOG_DATA_API_PORT}/blogposts/delete-blogpost/` + postId)
     .then(response => { 
       refreshPosts();
     })
@@ -90,5 +88,4 @@ const mapStateToProps = state => ({
   admins: state.admins
 });
 
-  export default connect(mapStateToProps)(Posts);
-//export default Posts;
+export default connect(mapStateToProps)(Posts);

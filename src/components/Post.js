@@ -4,6 +4,7 @@ import { Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import renderHTML from 'react-render-html';
+import Constants from '../constants';
 
 
 class Post extends React.Component {
@@ -58,15 +59,15 @@ class Post extends React.Component {
     }
 
     //let postJson = updatedPost.json
-    console.log("MY UPDATED POST " + JSON.stringify(updatedPost));
+    //console.log("MY UPDATED POST " + JSON.stringify(updatedPost));
     // axios.put("http://3.22.118.142:8080/blogposts/update-blogpost/" + this.state.postId, updatedPost)
-    axios.put("http://localhost:8080/blogposts/update-blogpost/" + this.state.postId, updatedPost)
+    axios.put(`${Constants.BLOG_DATA_API_URL}:${Constants.BLOG_DATA_API_PORT}/blogposts/update-blogpost/` + this.state.postId, updatedPost)
     .then(response => { 
-      console.log("MY RESPONSE: " + response);
+      //console.log("MY RESPONSE: " + response);
       //this.props.refreshPosts();
     })
     .catch(error => {
-        console.log("MY ERROR: " + error.response)
+        console.log(error.response)
     });
 
 
