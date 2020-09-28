@@ -27,11 +27,26 @@ class Post extends React.Component {
     this.editPost = this.editPost.bind(this);
     this.savePost = this.savePost.bind(this);
     //this.deletePost = this.deletePost.bind(this);
+    this.formatDate = this.formatDate.bind(this);
 
   }
 
   postBodyRef = React.createRef();
   postTitleRef = React.createRef();
+
+  formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
 
   savePost(e) {
     e.preventDefault();
@@ -49,12 +64,12 @@ class Post extends React.Component {
       body: this.postBodyRef.current.value,
       date: this.state.postDate,
       author: {
-        "id": 1,
-        "firstname": "Ghassan",
-        "lastname": "Nasr",
-        "type": "admin",
-        "username": "lorem",
-        "password": "ipsum"
+        id: 1,
+        firstname: "Ghassan",
+        lastname: "Nasr",
+        type: "admin",
+        username: "lorem",
+        password: "ipsum"
       }
     }
 
@@ -90,7 +105,7 @@ class Post extends React.Component {
             <>
               <div>
               <h2 className="blog-post-title">{this.state.postTitle}</h2>
-              <p className="blog-post-meta">Date: {this.state.postDate} by 
+              <p className="blog-post-meta">{this.formatDate(this.state.postDate)} by 
               <Link className="link-anchor-author" to="#"> {this.state.postAuthorFirstName} {this.state.postAuthorLastName}</Link>
               </p>
               {renderHTML(this.state.postBody)}
