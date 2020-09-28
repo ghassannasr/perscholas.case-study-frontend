@@ -10,12 +10,17 @@ const Login = props => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [refreshLogin, setRefreshLogin] =useState(0);
+
+  function refreshLoginForm() {
+    setRefreshLogin(refreshLogin + 1);
+  }
 
   async function fetchData() {
     axios.get(`${Constants.BLOG_DATA_API_URL}:${Constants.BLOG_DATA_API_PORT}/authors/get-authors-of-type/admin`)
-      //axios.get("http://3.22.118.142:8080/blogposts/get-all-posts")
       .then(response => {
         let adminList = response.data;
+        console.log("ADMIN IS " + adminList[0].firstname);
         props.dispatch({ type: "ADMIN_RETRIEVE", payload: { adminList } });
       })
       .catch(error => {
@@ -25,8 +30,9 @@ const Login = props => {
 
   useEffect(() => {
     fetchData();
+    //props.dispatch({ type: "SET_LOGIN_REFRESH_HANDLE", payload: { refreshLoginForm } });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [refreshLogin]);
 
 
   return (
@@ -41,13 +47,14 @@ const Login = props => {
         <Form.Text>{props.login.loginMessage}<hr /></Form.Text> 
         : <Form.Text>Please enter your administrator credentials:<hr /></Form.Text>
       }
-      <Form.Group controlId="formBasicEmail">
+      <Form.Group>
+      {/* <Form.Group controlId="formBasicEmail"> */}
         <Form.Label>Username:</Form.Label>
         <Form.Control
           type="username"
           placeholder="Enter username"
-          isInvalid={ props.login.adminIndex === "error" }
-          isValid={ props.login.adminIndex !== "" }
+          //isInvalid={ props.login.adminIndex === "error" }
+          //isValid={ props.login.adminIndex !== "" }
           onChange={e => setUsername(e.target.value)}
         />
         {/* <Form.Control.Feedback type="valid">
@@ -58,14 +65,15 @@ const Login = props => {
         </Form.Text> */}
       </Form.Group>
 
-      <Form.Group controlId="formBasicPassword">
+      <Form.Group>
+      {/* <Form.Group controlId="formBasicPassword"> */}
         <Form.Label>Password:</Form.Label>
         <Form.Control
           type="password"
           autoComplete="off"
           placeholder="Enter password"
-          isInvalid={ props.login.adminIndex === "error" }
-          isValid={ props.login.adminIndex !== "" }
+          //isInvalid={ props.login.adminIndex === "error" }
+          //isValid={ props.login.adminIndex !== "" }
           onChange={e => setPassword(e.target.value)}
         />
         {/* <Form.Control.Feedback type="invalid">
@@ -87,6 +95,7 @@ const Login = props => {
       >
         Submit
       </Button>
+      <Button onClick={refreshLoginForm}>Refresh</Button>
     </Form>
     </div>
     <div className="col-6"></div>
@@ -97,7 +106,8 @@ const Login = props => {
 
 const mapStateToProps = state => ({
   login: state.login,
-  admins: state.admins
+  admins: state.admins,
+  //funcRefreshLogin: state.funcRefreshLogin
 });
 //const mapDispatchToProps = check
 

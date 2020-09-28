@@ -1,7 +1,7 @@
 import React from 'react';
 
 //import { Container } from 'react-bootstrap';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, Button, Form, FormControl } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 //import {NavLink} from 'react-router-bootstrap'
@@ -9,6 +9,11 @@ import { connect } from 'react-redux';
 
 
 const Navigate = (props) => {
+
+  function logOut() {
+    //console.log("REFRESH FUNCTION: " + props.funcRefreshLogin);
+    props.dispatch({ type: "LOG_OUT", payload: {} });
+  }
   /*
      with Navbar: 
         when replacing expand with sm or md the breakpoint for collapsing changes, and true never collapses
@@ -31,18 +36,28 @@ const Navigate = (props) => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav >
           <Nav.Link as={Link} to='/blog/current'>Blog</Nav.Link>
-          </Nav>
+        </Nav>
         {/* <Link className="link-anchor-nav" to='/blog/current'>Blog</Link> */}
-         <Nav className="mr-auto"> <Nav.Link as={Link} to="/login">Login</Nav.Link></Nav>
-          
-        
-        <Navbar.Text className="mr-auto">
-            {
+        <Nav className="mr-auto"> <Nav.Link as={Link} to="/login">Login</Nav.Link></Nav>
+        {
+          props.login.adminIndex !== "" && props.login.adminIndex !== "error"
+          ?
+            <Form inline>
+              <Form.Label className="mr-sm-2">Logged in as: Ghassan Nasr</Form.Label>
+              <Button onClick={logOut} variant="outline-primary" size="sm">Logout</Button>
+            </Form>
+          :
+          ""
+        }
+          {/* <Navbar.Text className="mr-auto">
+            { 
               props.login.adminIndex !== "" && props.login.adminIndex !== "error"
-              ? "Logged in as: " + (props.admins)[0].firstname 
+              ? "Logged in as: " + (props.admins)[0].firstname + " " + (props.admins)[0].lastname
               : ""
             }
-        </Navbar.Text>
+            
+            <Button onClick={logOut} variant="secondary" size="sm">Logout</Button>
+        </Navbar.Text> */}
       </Navbar.Collapse>
     </Navbar>
   );
@@ -50,7 +65,8 @@ const Navigate = (props) => {
 
 const mapStateToProps = state => ({
   login: state.login,
-  admins: state.admins
+  admins: state.admins,
+  //funcRefreshLogin: state.funcRefreshLogin
 });
 
 export default connect(mapStateToProps)(Navigate);

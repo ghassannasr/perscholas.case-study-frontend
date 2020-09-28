@@ -1,6 +1,7 @@
 
 const setAdminLogin = (username, password, admins) => {
   let adminIndex = "error";
+
   for (let i = 0; i < admins.length; i++) {
     if (username === admins[i].username && password === admins[i].password) {
       adminIndex = i;
@@ -18,6 +19,7 @@ const initialState = {
     loginMessage: ""
   },
   admins: [],
+  //funcRefreshLogin: ""
 }
 
 export default (state = initialState, action) => {
@@ -43,8 +45,8 @@ export default (state = initialState, action) => {
     const login = {
       username: username,
       password: password,
-      loginMessage: loginMessage,
       adminIndex: adminIndex,
+      loginMessage: loginMessage,
     };
 
     const newState = {
@@ -54,6 +56,21 @@ export default (state = initialState, action) => {
 
     return newState;
   }
+  else if (action.type === "LOG_OUT") {
+    
+    const newState = initialState;
+    return newState;
+  
+  }
+  // else if(action.type === "SET_LOGIN_REFRESH_HANDLE") {
+  //   const { refreshFunc } = action.payload;
+  //   console.log("CONNECTING HANDLE");
+  //   const newState = {
+  //     ...state,
+  //     funcRefreshLogin: refreshFunc,
+  //   }
+  //   return newState
+  // }
 
   return state;
 
