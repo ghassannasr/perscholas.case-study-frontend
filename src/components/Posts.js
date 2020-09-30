@@ -81,6 +81,7 @@ const Posts = (props) => {
   * is in charge of monitoring the axios call fetchData(), the isLoading flag is set from true to false 
   * by useEffect() once fetchData() completes. 
   */
+  
   if (isLoading) {
     return <div className="App">Loading...</div>;
   }

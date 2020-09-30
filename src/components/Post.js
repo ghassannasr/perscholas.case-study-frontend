@@ -89,7 +89,6 @@ class Post extends React.Component {
       }
       </>
     );
-
   }
 
   isAdminLoggedIn() {

@@ -1,9 +1,6 @@
 import React from "react";
-//import { connect } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
-//import { Link } from 'react-router-dom';
 import axios from 'axios';
-//import renderHTML from 'react-render-html';
 import Constants from "../constants";
 
 
@@ -62,9 +59,6 @@ class CreatePost extends React.Component {
                                 }
                       ));
     }); 
-
-    
-
   }
   
   promptForPost() {
@@ -95,7 +89,6 @@ class CreatePost extends React.Component {
 
 newPost() {
   return (
-
     <div className="col-sm-12 blog-main">
       {
         this.state.flag === "save-post"
