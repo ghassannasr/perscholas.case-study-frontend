@@ -10,7 +10,7 @@ const Login = props => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [refreshLogin, setRefreshLogin] =useState(0);
+  const [refreshLogin, setRefreshLogin] = useState(0);
 
   function refreshLoginForm() {
     setRefreshLogin(refreshLogin + 1);
@@ -20,17 +20,15 @@ const Login = props => {
     axios.get(`${Constants.BLOG_DATA_API_URL}:${Constants.BLOG_DATA_API_PORT}/authors/get-authors-of-type/admin`)
       .then(response => {
         let adminList = response.data;
-        console.log("ADMIN IS " + adminList[0].firstname);
         props.dispatch({ type: "ADMIN_RETRIEVE", payload: { adminList } });
       })
       .catch(error => {
-        console.log(error);// some error handling
+        console.log(error);
       });
   }
 
   useEffect(() => {
     fetchData();
-    //props.dispatch({ type: "SET_LOGIN_REFRESH_HANDLE", payload: { refreshLoginForm } });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refreshLogin]);
 
@@ -38,68 +36,47 @@ const Login = props => {
   return (
     <div className="row">
       <div className="col-6">
-    <Form>
-      <h2>Login</h2>
-      <hr />
-      { 
-        props.login.loginMessage !== "" 
-        ? 
-        <Form.Text>{props.login.loginMessage}<hr /></Form.Text> 
-        : <Form.Text>Please enter your administrator credentials:<hr /></Form.Text>
-      }
-      <Form.Group>
-      {/* <Form.Group controlId="formBasicEmail"> */}
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type="username"
-          placeholder="Enter username"
-          //isInvalid={ props.login.adminIndex === "error" }
-          //isValid={ props.login.adminIndex !== "" }
-          onChange={e => setUsername(e.target.value)}
-        />
-        {/* <Form.Control.Feedback type="valid">
-          {props.login.loginMessage}
-        </Form.Control.Feedback> */}
-        {/* <Form.Text className="text-muted">
-          We'll never share your username with anyone else.
-        </Form.Text> */}
-      </Form.Group>
+        <Form>
+          <h2>Login</h2>
+          <hr />
+          {
+            props.login.loginMessage !== ""
+              ?
+              <Form.Text>{props.login.loginMessage}<hr /></Form.Text>
+              : <Form.Text>Please enter your administrator credentials:<hr /></Form.Text>
+          }
+          <Form.Group>
+            <Form.Label>Username:</Form.Label>
+            <Form.Control
+              type="username"
+              placeholder="Enter username"
+              onChange={e => setUsername(e.target.value)}
+            />
+          </Form.Group>
 
-      <Form.Group>
-      {/* <Form.Group controlId="formBasicPassword"> */}
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type="password"
-          autoComplete="off"
-          placeholder="Enter password"
-          //isInvalid={ props.login.adminIndex === "error" }
-          //isValid={ props.login.adminIndex !== "" }
-          onChange={e => setPassword(e.target.value)}
-        />
-        {/* <Form.Control.Feedback type="invalid">
-          {props.login.loginMessage}
-        </Form.Control.Feedback>
-        <Form.Control.Feedback type="valid">
-          {props.login.loginMessage}
-        </Form.Control.Feedback> */}
-      </Form.Group>
-      {/* <Form.Group controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group> */}
-      <Button
-        variant="primary"
-        type="button"
-        onClick={() =>
-          props.dispatch({ type: "FORM_SUBMIT", payload: { username, password } })
-        }
-      >
-        Submit
+          <Form.Group>
+            <Form.Label>Password:</Form.Label>
+            <Form.Control
+              type="password"
+              autoComplete="off"
+              placeholder="Enter password"
+              onChange={e => setPassword(e.target.value)}
+            />
+          </Form.Group>
+          <Button
+            variant="primary"
+            type="button"
+            onClick={() =>
+              props.dispatch({ type: "FORM_SUBMIT", payload: { username, password } })
+            }
+          >
+            Submit
       </Button>
-      <Button onClick={refreshLoginForm}>Refresh</Button>
-    </Form>
+          <Button onClick={refreshLoginForm}>Refresh</Button>
+        </Form>
+      </div>
+      <div className="col-6"></div>
     </div>
-    <div className="col-6"></div>
-    </div> /*close top row*/
   );
 };
 
@@ -107,7 +84,6 @@ const Login = props => {
 const mapStateToProps = state => ({
   login: state.login,
   admins: state.admins,
-  //funcRefreshLogin: state.funcRefreshLogin
 });
 //const mapDispatchToProps = check
 

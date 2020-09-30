@@ -25,58 +25,35 @@ const Posts = (props) => {
 
   function refreshPosts() {
     setRefreshCount(refreshCount + 1);
-    //console.log("IN THE REFRESH" + refreshCount);
   }
 
-  // function formatDate(date) {
-  //   var d = new Date(date),
-  //       month = '' + (d.getMonth() + 1),
-  //       day = '' + d.getDate(),
-  //       year = d.getFullYear();
-
-  //   if (month.length < 2) 
-  //       month = '0' + month;
-  //   if (day.length < 2) 
-  //       day = '0' + day;
-
-  //   return [year, month, day].join('-');
-  // }
   
+  /*
+  * This method filters in blog posts that were authored in 'monthyear' to the current month. If the method 
+  * writePosts below has this method call commented out, then the application lists all posts 
+  * in the main blog content area, regardless of date. Eventually, this application will only list current 
+  * month posts, and will have a series of links to posts from past months (one link per month per year)
+  */
+  function filterMonthYearPosts(posts, monthyear) {
+    let postsMonth = props.monthyear === monthyear ? new Date().getMonth() + 1
+        : props.monthyear.split("-")[0];
+
+      let postsYear = props.monthyear === monthyear ? new Date().getFullYear()
+        : props.monthyear.split("-")[1];
+
+      posts = posts.filter(item =>
+        (((new Date(item.date).getMonth() + 1) === postsMonth) &&
+          (new Date(item.date).getFullYear() === postsYear)));
+      return posts;
+  }
+
   function writePosts(blogPostsArray) {
-  //function writePosts(posts) {
-    //var blogPostsArray = [];
-
-    //if (posts.length !== 0) {
-      //if (posts !== undefined) {
-      //console.log("THE POSTS ARE " + JSON.stringify(posts));
-
-      // let postsMonth = props.monthyear === 'current' ? new Date().getMonth() + 1
-      //   : props.monthyear.split("-")[0];
-
-      // let postsYear = props.monthyear === 'current' ? new Date().getFullYear()
-      //   : props.monthyear.split("-")[1];
-
-
-      // blogPostsArray = posts.filter(item =>
-      //   (((new Date(item.date).getMonth() + 1) === postsMonth) &&
-      //     (new Date(item.date).getFullYear() === postsYear)));
-      //console.log("MILLISECONDS " + (blogPostsArray[0].date).getTime());
-      //blogPostsArray = posts;
+      //blogPostsArray = filterMonthYearPosts(blogPostsArray, 'current');
       blogPostsArray.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
-      let item;
-      for(item in blogPostsArray) {
-        //item = { ...item, date: formatDate(item.date)};
-        //console.log("THE DATE IS: " + item.date);
-      }
-
-      //blogPostsArray.map(item => ({ ...item, date: formatDate(item.date)}));
-      blogPostsArray = blogPostsArray.map(item => <Post key={item.id} post={item} delete={deletePost} refreshPosts={refreshPosts} />);
+      blogPostsArray = blogPostsArray.map(item => 
+          <Post key={item.id} post={item} delete={deletePost} refreshPosts={refreshPosts} />);
 
       return blogPostsArray;
-    //}
-    // else
-    //   return (<h2>Loading ...</h2>);
-
   }
 
   function deletePost(e) {
@@ -92,6 +69,14 @@ const Posts = (props) => {
     });
   }
 
+  /*
+  * Because the axios API call above is asynchronous, the Posts component will render at least once
+  * before axios returns with its payload. Any reference to the payload in the component's renderer 
+  * will be undefined and lead a runtime error, unless handled correctly. Therefore, a "isLoading" flag
+  * is added to this component's state to keep track of whether axios has completed. Since useEffect() 
+  * is in charge of monitoring the axios call fetchData(), the isLoading flag is set from true to false 
+  * by useEffect() once fetchData() completes. 
+  */
   if (isLoading) {
     return <div className="App">Loading...</div>;
   }
@@ -106,7 +91,6 @@ const Posts = (props) => {
       {writePosts(blogposts)}
     </div>
   )
-
 }
 
 const mapStateToProps = state => ({

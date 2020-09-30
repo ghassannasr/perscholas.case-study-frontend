@@ -1,11 +1,9 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import renderHTML from 'react-render-html';
 import Constants from '../constants';
-
 
 class Post extends React.Component {
 
@@ -17,6 +15,7 @@ class Post extends React.Component {
       postTitle: props.post.title,
       postBody: props.post.body,
       postDate: props.post.date,
+      postAuthor: props.admins[0], //this code assumes there is one author, the one stored at index 0 of the admins array in the Redux store
     }
 
     this.editPost = this.editPost.bind(this);
@@ -38,13 +37,7 @@ class Post extends React.Component {
       minutes = d.getUTCMinutes(),
       seconds = d.getUTCSeconds();
 
-    // if (month.length < 2)
-    //   month = '0' + month;
-    // if (day.length < 2)
-    //   day = '0' + day;
-//2020-09-13 10:46:48.563-04
     let dateString = `${dayOfWeek},  ${month}/${day}/${year} ${hours}:${minutes}:${seconds} UTC`; 
-    //return [year, month, day].join('-') + " " + hours;
     return dateString;
   }
 
@@ -55,19 +48,13 @@ class Post extends React.Component {
     this.setState(state => ({ postBody: this.postBodyRef.current.value }));
     this.setState(state => ({ postTitle: this.postTitleRef.current.value }));
 
+    console.log("THE AUTHOR IS: " + this.state.postAuthor['firstname'])
     let updatedPost = {
       id: this.state.postId,
       title: this.postTitleRef.current.value,
       body: this.postBodyRef.current.value,
       date: this.state.postDate,
-      author: {
-        id: 1,
-        firstname: "Ghassan",
-        lastname: "Nasr",
-        type: "admin",
-        username: "lorem",
-        password: "ipsum"
-      }
+      author: this.state.postAuthor,
     }
 
     axios.put(`${Constants.BLOG_DATA_API_URL}:${Constants.BLOG_DATA_API_PORT}/blogposts/update-blogpost/` + this.state.postId, updatedPost)
@@ -77,8 +64,6 @@ class Post extends React.Component {
       .catch(error => {
         console.log(error.response)
       });
-
-
   }
 
   editPost() {
@@ -95,8 +80,8 @@ class Post extends React.Component {
             <>
               <div>
                 <h2 className="blog-post-title">{this.state.postTitle}</h2>
-                <p className="blog-post-meta">{this.formatDate(this.state.postDate)} by
-              <Link className="link-anchor-author" to="#"> {this.state.postAuthorFirstName} {this.state.postAuthorLastName}</Link>
+                <p className="blog-post-meta">
+                    {this.formatDate(this.state.postDate)} by Ghassan Nasr
                 </p>
                 {renderHTML(this.state.postBody)}
               </div>
@@ -124,7 +109,6 @@ class Post extends React.Component {
               : {}
             )
           }
-          {/* { this.state.flag === "show-post" ? : } */}
         </div>
       </div>
     )
