@@ -69,6 +69,10 @@ const Posts = (props) => {
     });
   }
 
+  function isAdminLoggedIn() {
+    return(props.login.adminIndex !== "" && props.login.adminIndex !== "error");
+  }
+
   /*
   * Because the axios API call above is asynchronous, the Posts component will render at least once
   * before axios returns with its payload. Any reference to the payload in the component's renderer 
@@ -83,12 +87,8 @@ const Posts = (props) => {
 
   return (
     <div>
-      {
-        props.login.adminIndex !== "" && props.login.adminIndex !== "error" 
-        ? <CreatePost refreshPosts={refreshPosts} /> 
-        : ""
-      }
-      {writePosts(blogposts)}
+      { isAdminLoggedIn() ? <CreatePost refreshPosts={refreshPosts} /> : "" }
+      { writePosts(blogposts) }
     </div>
   )
 }

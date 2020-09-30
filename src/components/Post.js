@@ -99,23 +99,24 @@ class Post extends React.Component {
   }
 
   writeEditAndDeleteButtons() {
-    return(<>
-      <Button onClick={this.editPost} variant="outline-secondary">Edit</Button>
-      <Button value={this.state.postId} onClick={this.props.delete} variant="outline-secondary">Delete</Button>
-    </>
-);
+    return (
+      <>
+        <Button onClick={this.editPost} variant="outline-secondary">Edit</Button>
+        <Button value={this.state.postId} onClick={this.props.delete} variant="outline-secondary">Delete</Button>
+      </>
+    );
   }
 
   writeEditPostFormWithSaveButton() {
-    return(
-    <Form >
-      <Form.Label>Blog Post Title:</Form.Label>
-      <Form.Control ref={this.postTitleRef} defaultValue={this.state.postTitle} type="text" ></Form.Control>
-      <Form.Label>Blog Post Body:</Form.Label>
-      <Form.Control ref={this.postBodyRef} as="textarea" defaultValue={this.state.postBody} type="text" >
-      </Form.Control>
-      <Button onClick={this.savePost} variant="outline-primary">Save</Button>
-    </Form>
+    return (
+      <Form >
+        <Form.Label>Blog Post Title:</Form.Label>
+        <Form.Control ref={this.postTitleRef} defaultValue={this.state.postTitle} type="text" ></Form.Control>
+        <Form.Label>Blog Post Body:</Form.Label>
+        <Form.Control ref={this.postBodyRef} as="textarea" defaultValue={this.state.postBody} type="text" >
+        </Form.Control>
+        <Button onClick={this.savePost} variant="outline-primary">Save</Button>
+      </Form>
     );
   }
 
