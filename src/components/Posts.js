@@ -87,7 +87,10 @@ const Posts = (props) => {
 
   return (
     <div>
-      { isAdminLoggedIn() ? <CreatePost refreshPosts={refreshPosts} /> : "" }
+      { isAdminLoggedIn() 
+          ? <CreatePost refreshPosts={refreshPosts} /> 
+          : "" 
+      }
       { writePosts(blogposts) }
     </div>
   )

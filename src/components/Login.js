@@ -41,8 +41,7 @@ const Login = props => {
           <hr />
           {
             props.login.loginMessage !== ""
-              ?
-              <Form.Text>{props.login.loginMessage}<hr /></Form.Text>
+              ? <Form.Text>{props.login.loginMessage}<hr /></Form.Text>
               : <Form.Text>Please enter your administrator credentials:<hr /></Form.Text>
           }
           <Form.Group>
@@ -63,15 +62,13 @@ const Login = props => {
               onChange={e => setPassword(e.target.value)}
             />
           </Form.Group>
+
           <Button
             variant="primary"
             type="button"
-            onClick={() =>
-              props.dispatch({ type: "FORM_SUBMIT", payload: { username, password } })
-            }
-          >
-            Submit
-      </Button>
+            onClick={() => props.dispatch({ type: "FORM_SUBMIT", payload: { username, password } })}
+            >Submit
+          </Button>
           <Button onClick={refreshLoginForm}>Refresh</Button>
         </Form>
       </div>

@@ -122,15 +122,12 @@ class Post extends React.Component {
 
   showPost() {
     return (
-
       <div className="col-sm-12 blog-main">
         <div className="blog-post">
           { 
             this.state.flag === "show-post"
-              ?
-            this.writePost()
-              : 
-            this.state.flag === "edit-post" ? this.writeEditPostFormWithSaveButton() : {}
+              ? this.writePost()
+              : this.state.flag === "edit-post" ? this.writeEditPostFormWithSaveButton() : {}
           }
         </div>
       </div>
