@@ -87,21 +87,21 @@ class CreatePost extends React.Component {
   }
 
 
-newPost() {
-  return (
-    <div className="col-sm-12 blog-main">
-      {
-        this.state.flag === "save-post"
-          ? this.writeCreatePostForm()
-          : this.writeAddNewPostButton()         
-      }
-    </div>
-  )
-}
+  newPost() {
+    return (
+      <div className="col-sm-12 blog-main">
+        {
+          this.state.flag === "save-post"
+            ? this.writeCreatePostForm()
+            : this.writeAddNewPostButton()         
+        }
+      </div>
+    )
+  }
 
-render() {
-  return this.newPost()
-}
+  render() {
+    return this.newPost()
+  }
 }
 
 export default CreatePost;

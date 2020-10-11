@@ -12,7 +12,8 @@ const Posts = (props) => {
   const [isLoading, setLoading] = useState(true);
 
   async function fetchData() {
-    axios.get(`${Constants.BLOG_DATA_API_URL}:${Constants.BLOG_DATA_API_PORT}/blogposts/get-all-posts`)
+    // axios.get(`${Constants.BLOG_DATA_API_URL}:${Constants.BLOG_DATA_API_PORT}/blogposts/get-all-posts`)
+    axios.get(`${Constants.BLOG_DATA_API_URL}:${Constants.BLOG_DATA_API_PORT}/blogposts/get-admin-posts`)
       .then(res => {
         setBlogposts(res.data);
       })
